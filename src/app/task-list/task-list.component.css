@@ -1,0 +1,22 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-subtitle {
+    font-size: 1rem;
+  }
+  
+  .list-group-item {
+    border: none;
+  }
+  
+  .badge {
+    margin-right: 0.5rem;
+  }
+  

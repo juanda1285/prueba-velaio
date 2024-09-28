@@ -1,0 +1,22 @@
+<div class="container my-4">
+  <!-- Filtros -->
+  <div class="mb-4">
+    <button class="btn btn-primary me-2" (click)="filterTasks('all')">Todas</button>
+    <button class="btn btn-secondary me-2" (click)="filterTasks('completed')">Completadas</button>
+    <button class="btn btn-secondary" (click)="filterTasks('pending')">Pendientes</button>
+  </div>
+
+  <!-- Mensaje si no hay tareas -->
+  <div *ngIf="filteredTasks.length === 0" class="alert alert-warning">
+    No hay tareas disponibles.
+  </div>
+
+  <!-- Tarjetas de Tareas -->
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let task of filteredTasks">
+      <app-task-card [task]="task"></app-task-card>
+      <button *ngIf="!task.completed" class="btn btn-primary me-2 mt-2" (click)="openEditModal(task)">Editar</button>
+      <button class="btn btn-danger mt-2" (click)="deleteTask(task.id)">Eliminar</button>
+    </div>
+  </div>
+</div>

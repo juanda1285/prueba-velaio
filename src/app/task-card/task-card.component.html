@@ -1,0 +1,30 @@
+<div class="card position-relative">
+    <!-- Indicador de estado -->
+    <span class="badge position-absolute top-0 end-0 mt-2 me-2" [ngClass]="{'bg-success': task.completed, 'bg-warning': !task.completed}">
+      {{ task.completed ? 'Completada' : 'Pendiente' }}
+    </span>
+  
+    <div class="card-body">
+      <h5 class="card-title">{{ task.name }} - {{ task.dueDate | date }}</h5>
+      <h6 class="card-subtitle mb-1 mt-1 text-muted">Personas asociadas:</h6>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let person of task.people">
+          {{ person.name }} ({{ person.age }})
+          <div class="mt-1">
+            <h6 class="card-subtitle mt-2 mb-1 text-muted">Habilidades:</h6>
+            <span class="badge bg-primary" *ngFor="let skill of person.skills">{{ skill }}</span>
+          </div>
+        </li>
+      </ul>
+
+      <div *ngIf="!task.completed" class="d-flex align-items-center justify-content-end">
+        <label class="form-check-label me-2">¿Completar tarea?</label>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          (change)="confirmComplete(task)"
+        />
+      </div>  
+    </div>
+  </div>
+  

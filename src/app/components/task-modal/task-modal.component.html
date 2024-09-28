@@ -1,0 +1,85 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="taskModalLabel">
+    {{ task ? 'Editar Tarea' : 'Crear Nueva Tarea' }}
+  </h5>
+  <button type="button" class="btn-close" (click)="activeModal.dismissAll()" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="taskForm">
+    <!-- Nombre de la tarea-->
+    <div class="mb-3">
+      <label for="taskName" class="form-label">Nombre de la tarea</label>
+      <input type="text" id="taskName" formControlName="name" class="form-control" required>
+      <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="text-danger">
+        El nombre de la tarea es requerido.
+      </div>
+    </div>
+
+    <!-- Fecha límite -->
+    <div class="mb-3">
+      <label for="dueDate" class="form-label">Fecha Límite</label>
+      <input type="date" id="dueDate" formControlName="dueDate" class="form-control" [attr.min]="minDate" required>
+      <div *ngIf="taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched" class="text-danger">
+        La fecha límite es requerida.
+      </div>
+    </div>
+
+    <!-- Personas asociadas -->
+    <div formArrayName="people">
+      <div *ngFor="let person of people.controls; let i = index" [formGroupName]="i" class="border rounded p-3 mb-3">
+        <h5>Persona {{i + 1}}</h5>
+
+        <!-- Nombre de la persona -->
+        <div class="mb-3">
+          <label for="personName" class="form-label">Nombre de la persona</label>
+          <input type="text" formControlName="name" class="form-control" required>
+
+          <!-- Mensaje de error por nombre duplicado -->
+          <div *ngIf="hasDuplicateNames && taskForm.touched" class="text-danger">
+            No se pueden repetir los nombres de las personas.
+          </div>
+          <!-- Mensaje de error por longitud mínima -->
+          <div *ngIf="person.get('name')?.invalid && person.get('name')?.touched" class="text-danger">
+            El nombre debe ser mínimo de 5 caracteres.
+          </div>
+        </div>
+
+        <!-- Edad -->
+        <div class="mb-3">
+          <label for="age" class="form-label">Edad</label>
+          <input type="number" formControlName="age" class="form-control" required>
+          <div *ngIf="person.get('age')?.invalid && person.get('age')?.touched" class="text-danger">
+            La edad es requerida y debe ser mayor a 18.
+          </div>
+        </div>
+
+        <!-- Habilidades -->
+        <div formArrayName="skills" class="mb-3">
+          <label class="form-label">Habilidades</label>
+          <div *ngFor="let skill of getSkillsControls(i).controls; let j = index"
+            class="d-flex align-items-center mb-2">
+            <input type="text" [formControlName]="j" class="form-control me-2" placeholder="Habilidad" required>
+            <button type="button" class="btn btn-danger" (click)="removeSkill(i, j)">Eliminar</button>
+            <div *ngIf="skill.invalid && skill.touched" class="text-danger">
+              La habilidad es requerida.
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary mt-2" (click)="addSkill(i)">Añadir Habilidad</button>
+        </div>
+        <button type="button" class="btn btn-danger" (click)="removePerson(i)">Eliminar Persona</button>
+      </div>
+    </div>
+
+    <div class="modal-footer d-flex justify-content-between">
+      <button type="button" class="btn btn-secondary" (click)="addPerson()">
+        Agregar Persona
+      </button>
+
+      <button type="submit" class="btn btn-success" (click)="saveTask()">
+        Guardar Tarea
+      </button>
+    </div>
+
+
+  </form>
+</div>

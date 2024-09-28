@@ -1,0 +1,25 @@
+/* task-card.component.css */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+  }
+  
+  .card-title {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .list-group-item {
+    border: none;
+    font-size: 0.9rem;
+  }
+  
+  .badge {
+    margin-right: 0.5rem;
+  }
+  

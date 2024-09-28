@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TaskModalComponent } from './components/task-modal/task-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'prueba-velaio';
+
+  constructor(private modalService: NgbModal) {}
+
+  openTaskModal() {
+    const modalRef = this.modalService.open(TaskModalComponent);
+  }
+
 }
