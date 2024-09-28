@@ -1,6 +1,6 @@
 # PruebaVelaio
 
-This project fue realizado con [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Este proyecto fue realizado con [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
 ## Instalar dependencias
 
