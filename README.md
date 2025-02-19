@@ -1,4 +1,4 @@
-# PruebaVelaio
+# Task Manager
 
 Este proyecto fue realizado con [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
